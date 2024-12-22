@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Hero section -->
+<section class="hero-section set-bg" data-setbg="{% static 'webuni/img/bg.jpg'%}">
+  <div class="container">
+    <div class="hero-text text-white">
+      {% if request.user.is_authenticated %}
+      <h2> {% if request.user.profile.is_teacher == True %}
+         mentor
+        {% endif %} {{ request.user.username|capfirst }}
+
+
+      </h2>
+      {% else %}
+      <h2></h2>
+      {% endif %}
+      <p>.</p>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <form method="post" action="{% url 'courses:kerko_kurs' %}" class="intro-newslatter"> {% csrf_token %}
+          <input name="search" type="text" placeholder="find related topic">
+          <button type="submit" class="site-btn">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Hero section end -->
+
+<!-- categories section -->
+<section class="categories-section spad">
+  <div class="container">
+    <div class="section-title">
+      <h2 id="kurset">Basic Comprehensive Cybersecurity Courses</h2>
+      <p>Discover a world of opportunity and security through our wide array of cybersecurity courses. Our curriculum is carefully crafted to equip you with the essential knowledge and skills needed to excel in this critical field. Here's what you can expect from our courses.</p>
+    </div>
+    <div class="row">
+      {% for cat in category %}
+      <!-- categorie -->
+      <div data-aos="zoom-in" class="col-lg-4 col-md-6">
+        <div class="categorie-item">
+          <div class="ci-thumb set-bg" data-setbg="{{ cat.imazhi.url }}"></div>
+          <div class="ci-text">
+
+            <h5>{{cat.Title|capfirst}}</h5>
+
+            <p>{{ cat.description|capfirst }}</p>
+            <span><a class="btn btn-success" href="/courses/{{ cat.id }}">Look at the cases</a></span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- categories section end -->
+{% if request.user.is_authenticated %}
+{% else %}
+<section class="course-section spad">
+  <div class="container">
+    <div class="section-title mb-0">
+      <h2>Available basic cource</h2>
+      <p class="pb-3">እነዚህ ለሳይበር ቡድኖች በእኛ ላይ የሚከተሏቸው አንዳንድ የሥልጠና ቪዲዮዎች ናቸው።.</p>
+    </div>
+  </div>
+  <div class="course-warp">
+    <div class="row course-items-area">
+      <!-- course -->
+      <div class="mix col-lg-3 col-md-4 col-sm-6 finance">
+        <div class="course-item">
+          <div class="course-thumb set-bg" data-setbg="{% static 'webuni/img/courses/4.jpg' %}">
+            <iframe width="100%" height="290" src="https://www.youtube.com/embed/3CaG2GI1kn0?controls=0"  frameborder="0" controls allowfullscreen></iframe>
+
+          </div>
+          <div class="course-info">
+            <div class="course-text">
+              <h5>vurnerability</h5>
+              <p>Hacking Tool</p>
+              <div class="students">Course1</div>
+            </div>
+            <div class="course-author">
+              <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
+              <p>Dejene, <span>mentors</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- course -->
+      <div class="mix col-lg-3 col-md-4 col-sm-6 design">
+        <div class="course-item">
+          <div class="course-thumb set-bg" data-setbg="{% static 'webuni/img/courses/4.jpg' %}">
+            <iframe width="100%" height="290" src="https://www.youtube.com/embed/Yftp2VA0hcM?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="course-info">
+            <div class="course-text">
+              <h5>Defending</h5>
+              <p>invention</p>
+              <div class="students">Course2</div>
+            </div>
+            <div class="course-author">
+              <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
+              <p>Dejene, <span>Mentors</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- course -->
+      <div class="mix col-lg-3 col-md-4 col-sm-6 web">
+        <div class="course-item">
+          <div class="course-thumb set-bg" data-setbg="{% static 'webuni/img/courses/4.jpg' %}">
+            <iframe width="100%" height="290" src="https://www.youtube.com/embed/dKzJ5ANLiIo?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="course-info">
+            <div class="course-text">
+              <h5>Kali Linux</h5>
+              <p>Hacking</p>
+              <div class="students">course</div>
+            </div>
+            <div class="course-author">
+              <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
+              <p>Dejene, <span>Mentors</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- course -->
+      <div class="mix col-lg-3 col-md-4 col-sm-6 photo">
+        <div class="course-item">
+          <div class="course-thumb set-bg" data-setbg="{% static 'webuni/img/courses/4.jpg' %}">
+            <iframe width="100%" height="290" src="https://www.youtube.com/embed/ghkjm93LOag?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="course-info">
+            <div class="course-text">
+              <h5>Cyber attack</h5>
+              <p>Firewall</p>
+              <div class="students">course4</div>
+            </div>
+            <div class="course-author">
+              <div class="ca-pic set-bg" data-setbg="{% static 'webuni/img/authors/4.jpg' %}"></div>
+              <p>Dejene, <span>Mentors</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- course section end -->
+
+{% if request.user.is_authenticated %}
+
+<!-- signup section -->
+{% if request.user.profile.is_teacher == True %}
+<div class="container">
+  <h1 class="text-center">መለያህ የmentor ፈቃድ አለው።</h1><br>
+  <p class="text-center">By having a teacher account you now have fuller access to this platform. You can perform more functions than the initial student account. Some of these functions are:</p>
+
+  <div data-aos="fade-right" class="row mt-4 mb-4 bg-light">
+    <div class="col-md-4 text-center">
+      <h3 class="p-4">can create your own class</h3>
+      <a href="{% url 'courses:krijo_klase' %}" class="btn btn-outline-primary m-4">create class</a>
+    </div>
+    <div class="col-md-8">
+      <img class="img-fluid w-100" src="{% static 'webuni/img/categories/4.jpg' %}" alt="">
+    </div>
+  </div>
+
+  <div data-aos="fade-left" class="row mt-4 mb-4 bg-light">
+      <div class="col-md-8">
+        <img class="img-fluid w-100" src="{% static 'webuni/img/categories/2.jpg' %}" alt="">
+      </div>
+
+    <div class="col-md-4 text-center">
+      <h3 class="p-4">You can create your own content</h3>
+      <a href="{% url 'courses:krijo_lende' %}" class="btn btn-outline-primary m-4">create content</a>
+  </div>
+</div>
+
+<div data-aos="fade-right" class="row mt-4 mb-4 bg-light">
+  <div class="col-md-4 text-center">
+    <h3 class="p-4">You can upload your own lessons and videos..</h3>
+    <a href="{% url 'courses:krijo_mesim' %}" class="btn btn-outline-primary m-4">create lesson</a>
+  </div>
+  <div class="col-md-8">
+    <img class="img-fluid w-100" src="{% static 'webuni/img/categories/1.jpg' %}" alt="">
+  </div>
+</div>
+</div>
+
+{% else %}
+<section data-aos="zoom-out" class="signup-section spad">
+  <div class="signup-bg set-bg" data-setbg="{% static 'webuni/img/signup-bg.jpg' %}"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="signup-warp">
+          <div class="section-title text-white text-left">
+            <h2>Register as mentor</h2>
+            <p>To register as a mentor on the platform, you must complete the fields below and then you will have full access to upload courses and videos.</p>
+
+          </div>
+          <!-- signup form -->
+          <form action="/kerkesa/" method="post" class="signup-form">{% csrf_token %}
+            <input type="text" placeholder="your name" name="name">
+            <input type="text" placeholder="Email" name="e-mail">
+            <input type="text" placeholder="Phone number" name="phone">
+            <button class="site-btn">Send the Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endif %}
+<!-- signup section end -->
+{% else %}
+{% endif %}
+
+{% endblock content %}

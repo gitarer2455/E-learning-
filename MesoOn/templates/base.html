@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<title>AKa.com</title>
+	<meta charset="UTF-8">
+	<meta name="description" content="WebUni Education Template">
+	<meta name="keywords" content="webuni, education, creative, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Favicon -->
+	<link href="{% static 'webuni/img/favicon.png' %}" rel="shortcut icon"/>
+
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,500,500i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="{% static 'webuni/css/bootstrap.min.css'%}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/font-awesome.min.css' %}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/owl.carousel.css' %}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/style.css'%}"/>
+	<link rel="stylesheet" href="{% static 'webuni/css/freelancer.css'%}"/>
+	<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+	<!--[if lt IE 9]>
+	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav">
+		<div class="container">
+		  <a class="navbar-brand js-scroll-trigger" href="/"><img src="{% static 'webuni/img/logo.png' %}" alt=""></a>
+		  <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+			Menu
+	
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:home' %}">Header</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<li class="nav-item mx-0 mx-lg-1">
+					<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="/#kurset">Courses</a>
+				  </li>
+			  </li>
+			  {% if request.user.profile.is_teacher == True %}
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:krijo_klase' %}">Create Classes</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:krijo_lende' %}">Create Classes</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:krijo_mesim' %}">Create Classes</a>
+			  </li>
+			  {% else %}
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:contact' %}">Contact</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'courses:about' %}">About Us</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'blogs:post_list' %}">Share Idea</a>
+			  </li>
+			  {% endif %}
+			  {% if request.user.is_authenticated %}
+			  
+			  <div class="dropdown show">
+				<a class=" dropdown-toggle nav-link py-3 px-0 px-lg-3 rounded js-scroll-triggeraa" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{request.user.username}}
+				</a>
+			  
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				  <a class="dropdown-item" href="{% url 'users:profile' %}">Profile</a>
+				  <a class="dropdown-item" href="{% url 'account_logout' %}">Sign out</a>
+				</div>
+			  </div>
+			  {% else %}
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="active nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'account_login' %}">Sign In</a>
+			  </li>
+			  <li class="nav-item mx-0 mx-lg-1">
+				<a class="active nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{% url 'account_signup' %}">Sign up</a>
+			  </li>
+              {% endif %}
+			</ul>
+		  </div>
+		</div>
+	  </nav>
+
+{% include 'inc/messages.html' %}
+{% block content %}
+
+{% endblock content %}
+
+{% if request.user.is_authenticated %}
+{% else %}
+	<!-- banner section -->
+	<section class="banner-section spad">
+		<div class="container">
+			<div class="section-title mb-0 pb-2">
+				<h2>Join our community!</h2>
+				<p>የሳይበር ደህንነት መሰረታዊ ነገሮች፡ የሳይበር ደህንነት መሰረታዊ ነገሮችን ይወቁ፣ ማስፈራሪያን መለየት፣ የአደጋ ግምገማ እና የእርስዎን ዲጂታል ንብረቶች ለመጠበቅ ምርጥ ልምዶችን ጨምሮ።
+
+የበይነመረብ ደህንነት፡ እንዴት ድሩን በደህና ማሰስ እንደሚችሉ፣ የአስጋሪ ሙከራዎችን መለየት እና የመስመር ላይ መለያዎችዎን ደህንነት ይጠብቁ።
+
+የውሂብ ግላዊነት፡ የውሂብ ግላዊነትን፣ ምስጠራን እና የእርስዎን የግል መረጃ ከጊዜ ወደ ጊዜ በተገናኘ ዓለም ውስጥ እንዴት መጠበቅ እንደሚችሉ ይረዱ።
+
+ደህንነቱ የተጠበቀ የኮድ አሰራር፡ ለገንቢዎች፣ ኮርሶቻችን ደህንነቱ የተጠበቀ ኮድ ለመፃፍ እና የተለመዱ ተጋላጭነቶችን ለመለየት ግንዛቤዎችን ይሰጣሉ።
+
+የአውታረ መረብ ደህንነት፡ ፋየርዎል፣ ቪፒኤን እና የጣልቃ መገኘትን ጨምሮ የአውታረ መረብ ደህንነት አስፈላጊ ነገሮችን ያስሱ።
+
+የአደጋ ምላሽ፡ ለሳይበር አደጋዎች እንዴት ውጤታማ ምላሽ መስጠት እንደሚችሉ ይወቁ እና ይቀንሱ: </p>
+			</div>
+			<div class="text-center pt-5">
+				<a href="{% url 'account_signup' %}" class="site-btn">Register now</a>
+			</div>
+		</div>
+	</section>
+	<!-- banner section end -->
+{% endif %}
+
+
+	<!-- footer section -->
+	<footer class="footer-section spad pb-0">
+		<div class="footer-top">
+			<div class="footer-warp">
+				<div class="row">
+					<div class="widget-item">
+						<h4>Contact Information</h4>
+						<ul class="contact-list">
+							<li>Akrem <br>Kibrachew</li>
+							<li>+2519877822</li>
+							<li>coder.phymnan@gmail.com</li>
+						</ul>
+					</div>
+					<div class="widget-item">
+						<h4>Cource</h4>
+						<ul>
+							<li><a href="">Network Security</a></li>
+							<li><a href="">Information Security</a></li>
+							<li><a href="">Cryptography</a></li>
+							<li><a href="">Web Security</a></li>
+							<li><a href="">AI and Machine Learning in Cybersecurity</a></li>
+						</ul>
+					</div>
+					<div class="widget-item">
+						<h4>INSA</h4>
+						<ul>
+							<li><a href="">Mentors</a></li>
+							<li><a href="">awards</a></li>
+							<li><a href="">Best Ethical hackers </a></li>
+							<li><a href="">Info</a></li>
+							
+						</ul>
+					</div>
+					<div class="widget-item">
+						<h4>Social media </h4>
+						<ul>
+							<li><a href="">YouTube</a></li>
+							<li><a href="">Freelance</a></li>
+							<li><a href="">Instagram</a></li>
+							<li><a href="">Telegram</a></li>
+							<li><a href="">Linked In</a></li>
+					
+						</ul>
+					</div>
+					<div class="widget-item">
+						<h4>latest Cources</h4>
+						<form class="footer-newslatter">
+							<input type="email" placeholder="E-mail">
+							<button class="site-btn">Subscribe</button>
+							<p>*Get the latest Info by subscribing</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<div class="footer-warp">
+				<ul class="footer-menu">
+					<li><a href="#">Terms & Conditions</a></li>
+					<li><a href="#">Register</a></li>
+					<li><a href="#">Privacy</a></li>
+				</ul>
+				<div class="">
+	Copyright &copy; Akrem <script>document.write(new Date().getFullYear());</script> All rights reserved.
+</div>
+			</div>
+		</div>
+	</footer>
+	<!-- footer section end -->
+
+
+	<!--====== Javascripts & Jquery ======-->
+	<script src="{% static 'webuni/js/jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'webuni/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'webuni/js/mixitup.min.js' %}"></script>
+	<script src="{% static 'webuni/js/circle-progress.min.js' %}"></script>
+	<script src="{% static 'webuni/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'webuni/js/main.js' %}"></script>
+	<script src="{% static 'webuni/js/freelancer.js' %}"></script>
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</html>
